@@ -17,7 +17,7 @@ export default function Page() {
     try {
       const [{ GLTFExporter }, { getSceneRef }] = await Promise.all([
         import('three/examples/jsm/exporters/GLTFExporter.js'),
-        import('@/components/sign-scene'),
+        import('@/components/canvas-wrapper'),
       ])
 
       const scene = getSceneRef()
