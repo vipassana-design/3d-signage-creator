@@ -7,7 +7,7 @@ import { ConfigSidebar } from '@/components/config-sidebar'
 import { FloatingControls } from '@/components/floating-controls'
 import { ARModal } from '@/components/ar-modal'
 
-const CanvasWrapper = dynamic(() => import('@/components/canvas-wrapper').then(mod => ({ default: mod.CanvasWrapper })), {
+const CanvasWrapper = dynamic(() => import('@/components/canvas-wrapper'), {
   ssr: false,
   loading: () => (
     <div className="absolute inset-0 flex items-center justify-center bg-midnight-900">
