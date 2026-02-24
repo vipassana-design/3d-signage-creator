@@ -2,7 +2,7 @@
 
 import React, { useRef, useMemo, Suspense, useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls, Environment, Text3D, Center, ContactShadows } from '@react-three/drei'
+import { OrbitControls, Environment, Text3D, Center, ContactShadows, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js'
 import { useStore, MATERIAL_PROPERTIES } from '@/lib/store'
@@ -27,18 +27,15 @@ function SceneCapture() {
   return null
 }
 
-function Wall() {
-  const width = useStore((s) => s.width)
-  const height = useStore((s) => s.height)
-  const wallW = Math.max((width / 100) * 3, 6)
-  const wallH = Math.max((height / 100) * 3, 4)
+function Environment3D() {
+  const environment = useStore((s) => s.environment)
+  const modelUrl = environment === 'interior' 
+    ? 'https://raw.githubusercontent.com/vipassana-design/3d-signage-creator/main/public/interior.glb'
+    : 'https://raw.githubusercontent.com/vipassana-design/3d-signage-creator/main/public/exterior.glb'
+  
+  const gltf = useGLTF(modelUrl)
 
-  return (
-    <mesh position={[0, 0, -0.15]} receiveShadow>
-      <planeGeometry args={[wallW, wallH]} />
-      <meshStandardMaterial color="#1a1a2e" roughness={0.95} metalness={0} />
-    </mesh>
-  )
+  return <primitive object={gltf.scene} scale={[1, 1, 1]} />
 }
 
 function Sign3D() {
@@ -228,7 +225,10 @@ export function ThreeScene() {
         <SceneCapture />
         <Lighting />
         <CameraController />
-        <Wall />
+        
+        <Suspense fallback={null}>
+          <Environment3D />
+        </Suspense>
 
         <Suspense fallback={null}>
           <Sign3D />
