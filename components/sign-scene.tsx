@@ -1,17 +1,36 @@
 'use client'
 
-import { useRef, useMemo, Suspense, useEffect } from 'react'
-import { Canvas, useThree } from '@react-three/fiber'
-import {
-  Text3D,
-  Center,
-  Environment,
-  OrbitControls,
-  Loader,
-  ContactShadows,
-} from '@react-three/drei'
-import * as THREE from 'three'
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js'
+import { useRef, useMemo, Suspense, useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+
+// Client-only imports
+let Canvas: any
+let useThree: any
+let Text3D: any
+let Center: any
+let Environment: any
+let OrbitControls: any
+let Loader: any
+let ContactShadows: any
+let THREE: any
+let SVGLoader: any
+
+if (typeof window !== 'undefined') {
+  const fiber = require('@react-three/fiber')
+  const drei = require('@react-three/drei')
+  Canvas = fiber.Canvas
+  useThree = fiber.useThree
+  Text3D = drei.Text3D
+  Center = drei.Center
+  Environment = drei.Environment
+  OrbitControls = drei.OrbitControls
+  Loader = drei.Loader
+  ContactShadows = drei.ContactShadows
+  THREE = require('three')
+  const svgLoaderModule = require('three/examples/jsm/loaders/SVGLoader.js')
+  SVGLoader = svgLoaderModule.SVGLoader
+}
+
 import { useStore, type MaterialType, type CameraView } from '@/lib/store'
 
 // --- PBR Material Config ---
@@ -370,6 +389,20 @@ function SceneCapture() {
 
 // --- Exported component ---
 export function SignScene() {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient || !Canvas) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-midnight-900">
+        <div className="text-accent-light text-sm font-mono">Cargando escena 3D...</div>
+      </div>
+    )
+  }
+
   return (
     <div className="absolute inset-0">
       <Canvas
