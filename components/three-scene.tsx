@@ -29,13 +29,18 @@ function SceneCapture() {
 
 function Environment3D() {
   const environment = useStore((s) => s.environment)
-  const modelUrl = environment === 'interior' 
+  const modelUrl = environment === 'interior'
     ? 'https://raw.githubusercontent.com/vipassana-design/3d-signage-creator/main/public/interior.glb'
     : 'https://raw.githubusercontent.com/vipassana-design/3d-signage-creator/main/public/exterior.glb'
-  
+
   const gltf = useGLTF(modelUrl)
 
-  return <primitive object={gltf.scene} scale={[1, 1, 1]} />
+  return <primitive
+    object={gltf.scene}
+    position={[0, -1, -5]} // [Izquierda/Derecha, Arriba/Abajo, Adelante/Atrás]
+    rotation={[0, 0, 0]}   // Rotación en los ejes [X, Y, Z] (en radianes)
+    scale={[0.2, 0.2, 0.2]}      // Tamaño [X, Y, Z] (1 es el 100% del tamaño original)
+  />
 }
 
 function Sign3D() {
@@ -225,7 +230,7 @@ export function ThreeScene() {
         <SceneCapture />
         <Lighting />
         <CameraController />
-        
+
         <Suspense fallback={null}>
           <Environment3D />
         </Suspense>
