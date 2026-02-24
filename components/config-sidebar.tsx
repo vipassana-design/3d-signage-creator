@@ -233,7 +233,7 @@ export function ConfigSidebar() {
             <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-4 border-dashed">
               <span className="font-bold text-lg tracking-tight text-foreground">RESUMEN</span>
               <span className="text-xs font-mono text-muted-foreground">
-                #REQ-{Math.floor(1000 + Math.random() * 9000)}
+                #REQ-8921
               </span>
             </div>
 
