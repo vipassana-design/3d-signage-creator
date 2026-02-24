@@ -1,11 +1,20 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import dynamic from 'next/dynamic'
 import { Header } from '@/components/header'
 import { ConfigSidebar } from '@/components/config-sidebar'
 import { FloatingControls } from '@/components/floating-controls'
 import { ARModal } from '@/components/ar-modal'
-import { CanvasWrapper } from '@/components/canvas-wrapper'
+
+const CanvasWrapper = dynamic(() => import('@/components/canvas-wrapper').then(mod => ({ default: mod.CanvasWrapper })), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 flex items-center justify-center bg-midnight-900">
+      <div className="text-accent-light text-sm font-mono">Cargando escena 3D...</div>
+    </div>
+  ),
+})
 
 export default function Page() {
   const [arOpen, setArOpen] = useState(false)

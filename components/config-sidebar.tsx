@@ -243,13 +243,13 @@ export function ConfigSidebar() {
                   Costo Material ({MATERIAL_PRICES[store.material].name})
                 </span>
                 <span className="font-bold text-foreground">
-                  ${pricing.materialCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                  ${pricing.materialCost.toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Costo Tamano</span>
                 <span className="font-bold text-foreground">
-                  ${pricing.sizeCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                  ${pricing.sizeCost.toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between">
@@ -257,14 +257,14 @@ export function ConfigSidebar() {
                   Costo Cantidad (x{store.quantity})
                 </span>
                 <span className="font-bold text-foreground">
-                  ${pricing.quantityCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                  ${pricing.quantityCost.toFixed(2)}
                 </span>
               </div>
               {pricing.discount > 0 && (
                 <div className="flex justify-between text-accent-light/70 mt-1">
                   <span>Descuento Volumen</span>
                   <span>
-                    -${pricing.discount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    -${pricing.discount.toFixed(2)}
                   </span>
                 </div>
               )}
@@ -278,10 +278,7 @@ export function ConfigSidebar() {
                 <span className="text-xs text-muted-foreground">MXN Incl. IVA</span>
               </div>
               <span className="text-3xl font-bold tracking-tight text-foreground">
-                ${Math.floor(pricing.total).toLocaleString()}
-                <span className="text-lg align-top text-muted-foreground">
-                  .{(pricing.total % 1).toFixed(2).split('.')[1]}
-                </span>
+                ${pricing.total.toFixed(2)}
               </span>
             </div>
 

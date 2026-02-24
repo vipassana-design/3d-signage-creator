@@ -357,4 +357,5 @@ export function CanvasWrapper() {
   )
 }
 
+export { CanvasWrapper }
 export default CanvasWrapper
