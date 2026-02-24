@@ -148,7 +148,7 @@ function TextSign({
     <Center position={[0, 0, extrudeDepth / 2 + 0.02]}>
       <Text3D
         ref={meshRef}
-        font="/fonts/Geist_Bold.json"
+        font="https://threejs.org/examples/fonts/helvetiker_bold.typeface.json"
         size={0.35}
         height={extrudeDepth}
         bevelEnabled

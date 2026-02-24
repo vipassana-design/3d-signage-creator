@@ -1,17 +1,11 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import dynamic from 'next/dynamic'
 import { Header } from '@/components/header'
 import { ConfigSidebar } from '@/components/config-sidebar'
 import { FloatingControls } from '@/components/floating-controls'
 import { ARModal } from '@/components/ar-modal'
-
-// Dynamic import for the 3D scene to avoid SSR issues
-const SignScene = dynamic(
-  () => import('@/components/sign-scene').then((mod) => ({ default: mod.SignScene })),
-  { ssr: false }
-)
+import { CanvasWrapper } from '@/components/canvas-wrapper'
 
 export default function Page() {
   const [arOpen, setArOpen] = useState(false)
@@ -64,7 +58,7 @@ export default function Page() {
         <div className="absolute inset-0 bg-gradient-to-b from-midnight-950 via-background to-midnight-900" />
 
         {/* 3D Canvas */}
-        <SignScene />
+        <CanvasWrapper />
 
         {/* Floating Controls */}
         <FloatingControls onOpenAR={() => setArOpen(true)} />
