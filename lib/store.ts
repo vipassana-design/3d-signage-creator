@@ -81,6 +81,17 @@ export const useStore = create<StoreState>((set, get) => ({
   reset: () => set(defaultState),
 }))
 
+// Material properties for 3D rendering
+export const MATERIAL_PROPERTIES: Record<
+  MaterialType,
+  { color: string; metalness: number; roughness: number; clearcoat?: number }
+> = {
+  aluminio: { color: '#d4d4d4', metalness: 0.9, roughness: 0.15 },
+  wpc: { color: '#8b7355', metalness: 0.1, roughness: 0.8 },
+  ceramica: { color: '#e8f4f8', metalness: 0.2, roughness: 0.1, clearcoat: 0.8 },
+  metales: { color: '#b8b8b8', metalness: 1.0, roughness: 0.2 },
+}
+
 // Pricing logic
 export const MATERIAL_PRICES: Record<MaterialType, { perCm2: number; name: string }> = {
   aluminio: { perCm2: 0.45, name: 'Aluminio' },
