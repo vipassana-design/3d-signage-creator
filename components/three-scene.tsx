@@ -4,7 +4,7 @@ import React, { useRef, useMemo, Suspense, useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls, Environment, Text3D, Center, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js'
+import { SVGLoader } from 'three-stdlib'
 import { useStore, MATERIAL_PROPERTIES } from '@/lib/store'
 
 const FONT_URL = 'https://threejs.org/examples/fonts/helvetiker_bold.typeface.json'
