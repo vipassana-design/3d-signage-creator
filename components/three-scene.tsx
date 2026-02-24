@@ -4,7 +4,7 @@ import React, { useRef, useMemo, Suspense, useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls, Environment, Text3D, Center, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
-import { SVGLoader } from 'three-stdlib'
+import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js'
 import { useStore, MATERIAL_PROPERTIES } from '@/lib/store'
 
 const FONT_URL = 'https://threejs.org/examples/fonts/helvetiker_bold.typeface.json'
@@ -48,7 +48,7 @@ function Sign3D() {
   const height = useStore((s) => s.height)
   const depth = useStore((s) => s.depth)
   const svgData = useStore((s) => s.svgData)
-  
+
   const matProps = MATERIAL_PROPERTIES[material]
   const groupRef = useRef<THREE.Group>(null)
 
